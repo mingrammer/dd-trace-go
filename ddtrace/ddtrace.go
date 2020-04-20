@@ -58,6 +58,9 @@ type Span interface {
 
 	// Context returns the SpanContext of this Span.
 	Context() SpanContext
+
+	// Log returns a string representing the span that is suitable for injecting into logs.
+	Log() string
 }
 
 // SpanContext represents a span state that can propagate to descendant spans

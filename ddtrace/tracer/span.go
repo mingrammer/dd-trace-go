@@ -337,6 +337,18 @@ func (s *span) String() string {
 	return strings.Join(lines, "\n")
 }
 
+// Log returns a string representing the span that is suitable for injecting into logs.
+func (s *span) Log() string {
+	log := fmt.Sprintf("dd.trace_id=%d dd.span_id=%d dd.service=%s", s.TraceID, s.SpanID, s.Service)
+	if e := s.Meta[ext.Environment]; e != "" {
+		log += fmt.Sprintf(" dd.env=%s", e)
+	}
+	if v := s.Meta[ext.Version]; v != "" {
+		log += fmt.Sprintf(" dd.version=%s", v)
+	}
+	return log
+}
+
 const (
 	keySamplingPriority        = "_sampling_priority_v1"
 	keySamplingPriorityRate    = "_sampling_priority_rate_v1"
