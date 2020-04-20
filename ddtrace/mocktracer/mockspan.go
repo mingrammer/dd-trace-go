@@ -229,5 +229,9 @@ baggage: %#v
 `, s.name, s.tags, s.startTime, s.finishTime, sc.spanID, s.parentID, sc.traceID, sc.baggage)
 }
 
+func (s *mockspan) Log() string {
+	return ""
+}
+
 // Context returns the SpanContext of this Span.
 func (s *mockspan) Context() ddtrace.SpanContext { return s.context }
